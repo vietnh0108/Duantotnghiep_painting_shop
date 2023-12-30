@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Essence - Fashion Ecommerce Template</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="css/core-style.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+    <main ng-controller="order-ctrl">
+        <!-- ##### Header Area Start ##### -->
+        <!-- ##### Right Side Cart End ##### -->
+
+        <!-- ##### Breadcumb Area Start ##### -->
+        <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <div class="page-title text-center">
+                            <h2>Thanh toán</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ##### Breadcumb Area End ##### -->
+
+        <!-- ##### Checkout Area Start ##### -->
+        <div class="checkout_area section-padding-80">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12 col-md-6">
+                        <div class="checkout_details_area mt-50 clearfix">
+
+                            <div class="cart-page-heading mb-30">
+                                <h5>Địa chỉ người nhận</h5>
+                            </div>
+
+                            <form action="#" method="post">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="first_name">Họ và tên <span>*</span></label>
+                                        <input type="text" class="form-control" ng-model="account.fullname"
+                                            name="fullname" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="last_name">Số điện thoại <span>*</span></label>
+                                        <input type="tel" class="form-control" ng-model="account.phone"
+                                            name="phone_number" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="first_name">Quận <span>*</span></label>
+                                        <input type="text" class="form-control" ng-model="quan" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="last_name">Phường <span>*</span></label>
+                                        <input type="text" class="form-control" ng-model="phuong" required>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="company">Thành phố </label>
+                                        <input type="text" class="form-control" ng-model="thanhpho" required>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="street_address">Địa chỉ nhà <span>*</span></label>
+                                        <input type="text" class="form-control mb-3" ng-model="sonha" required>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-5 ml-lg-auto">
+                        <div class="order-details-confirmation">
+
+                            <div class="cart-page-heading">
+                                <h5>Hóa đơn của bạn</h5>
+                                <p>Thông tin</p>
+                            </div>
+
+                            <ul class="order-details-form mb-4">
+                                <li><span>Sản phẩm</span> <span>Tổng giá</span></li>
+                                <li ng-repeat="item in cart.listCarts"><span>{{item.product.productname}}</span>
+                                    <span>{{item.product.price * item.quantity | number: 0}} đ</span></li>
+                                <!-- <li><span>Subtotal</span> <span>$59.90</span></li> -->
+                                <li><span>Phí ship</span> <span>{{shipfee| number: 0}} đ</span></li>
+                                <li><span>Tổng thanh toán</span> <span>{{cart.amount| number:0 }} đ</span></li>
+                            </ul>
+                            <div ng-if="cart.count > 0">
+                                <button ng-click="order.purchase()" class="btn essence-btn">Place Order</a>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- ##### Checkout Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+</body>
+
+</html>

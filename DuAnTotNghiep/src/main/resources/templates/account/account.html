@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="animsition" ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+	<main>
+		<div class="breadcumb_area breadcumb-style-two bg-img"
+			style="background-image: url(../img/bg-img/breadcumb2.jpg);">
+			<div class="container h-100">
+				<div class="row h-100 align-items-center">
+					<div class="col-12">
+						<div class="page-title text-center">
+							<h2>Thông tin người dùng</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-controller="profile-ctrl">
+			<div class="container">
+
+				<form class="mt-2 mb-2" name="formdulieu">
+					<div class="row">
+						<div class="col-3">
+							<label for="inuput_img" ng-if="imageUrl != null">
+								<img style="height: 350px;object-fit: cover;" class="pointer w-100"
+									ng-src="{{imageUrl}}">
+							</label>
+							<label for="inuput_img" ng-if="imageUrl == null">
+								<img style="height: 350px;object-fit: cover;" class="pointer w-100"
+									ng-src="{{'/images/avatar/' + user.profile.photo}}">
+							</label>
+
+							<input ng-model="selectedImage" hidden
+								onchange="angular.element(this).scope().displayImage()" style="width:60%;"
+								name="hinhanh" type="file" accept="image/*" id="inuput_img">
+							<button ng-click="user.update()" type="submit" class="btn btn-primary">Cập nhật thông
+								tin</button>
+						</div>
+						<div class="col-8 form-group">
+							<label for="exampleInputEmail3"><img class="how-pos4 pointer-none"
+									src="/images/icons/price_24px.png" alt="ICON"> Họ và tên</label>
+							<input type="text" ng-model="user.profile.fullname" ng-minlength="4"
+								placeholder="Nhập họ tên" class="form-control" name="hoten" required /><br>
+							<div ng-show="formdulieu.hoten.$dirty || formdulieu.$submitted">
+								<span class="badge badge-danger font-italic"
+									ng-show="formdulieu.hoten.$error.minlength || formdulieu.hoten.$error.maxlength">
+									Nhập họ và tên từ 4 ký tự trở lên</span>
+								<span class="badge badge-danger font-italic" ng-show="formdulieu.hoten.$error.required">
+									Họ và tên không được rỗng</span>
+							</div>
+							<br>
+							<label for="exampleInputPassword4"><img class="how-pos4 pointer-none"
+									src="/images/icons/Numbers_24px.png" alt="ICON"> Mật khẩu</label>
+							<input type="password" name="matkhau" ng-model="user.profile.password" ng-minlength="6"
+								placeholder="Nhập mật khẩu" class="form-control" required /><br>
+							<div ng-show="formdulieu.$submitted || formdulieu.matkhau.$dirty ">
+								<span class="badge badge-danger font-italic"
+									ng-show="formdulieu.matkhau.$error.minlength">
+									Nhập mật khẩu từ 6 ký tự trở lên</span>
+								<span class="badge badge-danger font-italic"
+									ng-show="formdulieu.matkhau.$error.required">
+									Mật khẩu không được rỗng</span>
+							</div>
+							<br>
+							<label><img class="how-pos4 pointer-none" src="/images/icons/Email Sign_24px.png"
+									alt="ICON"> Địa chỉ email</label>
+							<input type="email" ng-model="user.profile.email"
+								pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" name="mail"
+								class="form-control" placeholder="Nhập email" required /><br>
+							<div ng-show="formdulieu.mail.$dirty || formdulieu.$submitted">
+								<span class="badge badge-danger font-italic" ng-show="formdulieu.mail.$error.pattern">
+									Vui lòng nhập đúng định dạng email (VD: user@gmail.com)</span>
+								<span class="badge badge-danger font-italic" ng-show="formdulieu.mail.$error.required">
+									Email không được rỗng</span>
+							</div>
+							<br>
+							<label><img class="how-pos4 pointer-none" alt="ICON"> Số điện thoại</label>
+							<input type="tel" ng-model="user.profile.phone" name="sdt" class="form-control"
+								ng-minlength="10" ng-maxlength="10" placeholder="Nhập số điện thoại" required /><br>
+							<div ng-show="formdulieu.sdt.$dirty || formdulieu.$submitted">
+
+								<span class="badge badge-danger font-italic"
+									ng-show="formdulieu.sdt.$error.minlength || formdulieu.sdt.$error.maxlength">
+									<span class="badge badge-danger font-italic"
+										ng-show="formdulieu.sdt.$error.minlength || formdulieu.sdt.$error.maxlength">
+										Nhập số điện thoại với 10 ký tự</span>
+									<span class="badge badge-danger font-italic"
+										ng-show="formdulieu.sdt.$error.required">
+										Số điện thoại không được rỗng</span>
+							</div>
+							<br>
+							<label><img class="how-pos4 pointer-none" src="/images/icons/Email Sign_24px.png"
+									alt="ICON"> Giới tính</label>
+							<div class="form-group clearfix">
+								<div class="icheck-primary d-inline">
+									<input type="radio" id="radioPrimary1" required ng-value="true"
+										ng-model="user.profile.gender" name="gender" checked>
+									<label for="radioPrimary1"> Nam
+									</label>
+								</div>
+								<div class="icheck-primary d-inline">
+									<input type="radio" id="radioPrimary2" required ng-value="false"
+										ng-model="user.profile.gender" name="gender">
+									<label for="radioPrimary2"> Nữ
+									</label>
+								</div>
+								<div ng-show="formdulieu.user.$dirty || formdulieu.$submitted">
+									<span class="badge badge-danger font-italic"
+										ng-show="formdulieu.gender.$error.required">
+										Vui lòng chọn giới tính</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+				</form>
+
+
+
+
+			</div>
+		</div>
+
+	</main>
+
+</body>
+
+</html>

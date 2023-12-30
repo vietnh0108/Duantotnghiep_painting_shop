@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Essence - Đăng nhập</title>
+</head> 
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+    <!-- ##### Header Area Start ##### -->
+   <main>
+    <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Đăng nhập</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Checkout Area Start ##### -->
+    <div class="checkout_area section-padding-80">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="checkout_details_area mt-50 clearfix">
+                        <form th:action="@{/security/login}" method="post">
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <label for="company">Tài khoản <span>*</span></label>
+                                    <input type="text" class="form-control" name="username" required>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="company">Mật khẩu <span>*</span></label>
+                                    <input type="password" class="form-control" name="password" required>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-block mb-2">
+                                        <a th:href="@{/security/register}" class="" style="color: black;">Bạn chưa có tài khoản ?</label>
+                                    </div>
+                                   
+                                    
+                                    <button type="submit" class="btn essence-btn">Đăng nhập</a>
+                                   
+                                </div>
+                                <div class="d-block mb-2">
+                                        <i class="pull-left text-danger" th:text="${message}"></i>
+                                    </div>
+                            </div>
+                        </form>
+                        
+                        
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+    
+   </main>
+    <!-- ##### Checkout Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+</body>
+
+</html>

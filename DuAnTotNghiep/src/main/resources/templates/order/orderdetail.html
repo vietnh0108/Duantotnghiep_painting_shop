@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+    <main>
+        <div class="breadcumb_area breadcumb-style-two bg-img" style="background-image: url(../img/bg-img/breadcumb2.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <div class="page-title text-center">
+                            <h2>Hóa đơn chi tiết</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ##### Breadcumb Area End ##### -->
+    
+        <!-- ##### Blog Wrapper Area Start ##### -->
+        <div class="blog-wrapper section-padding-80">
+            
+                <div class="col-12">
+                    <table class="table">
+                        
+                        <thead>
+                            <tr class="table_head">
+                                <th class="p-lr-20">Tên sản phẩm</th>
+                                <th class="">số lượng</th>
+                                <th class="">Tổng tiền</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="detail: ${billdetail}">
+                              
+                                <td style="padding-bottom: 0" class="" th:text="${detail.product.PRODUCTNAME}">
+                                    </td>
+                               
+                                    <td style="padding-bottom: 0" class="" th:text="${detail.QUANTITY}">
+                                        </td>
+                                        <td style="padding-bottom: 0" class="" th:text="${detail.SUMPRICE}">
+                                        </td>
+                                       
+                              
+                            </tr>
+            
+                        </tbody>
+                    </table>
+                   
+                </div>
+            
+        </div>
+        
+        
+    </main>
+
+</body>
+
+</html>

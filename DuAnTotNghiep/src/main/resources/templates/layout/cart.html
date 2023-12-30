@@ -1,0 +1,50 @@
+<div class="cart-bg-overlay"></div>
+
+<div class="right-side-cart-area">
+
+        <!-- Cart Button -->
+        <div class="cart-button">
+            <a href="#" id="rightSideCart"><img src="/img/core-img/bag.svg" alt=""> <span>{{cart.count}}</span></a>
+        </div>
+
+        <div class="cart-content d-flex">
+
+            <!-- Cart List Area -->
+            <div class="cart-list">
+                <!-- Single Cart Item -->
+                <div class="single-cart-item" style="margin-bottom: 170px;" ng-repeat="item in cart.listCarts"> 
+                    <a href="#" class="product-image">
+                        <img style="height: 84px; object-fit: cover;" src="/images/products/{{item.product.image}}" class="cart-thumb" alt="" >
+                        <!-- Cart Item Desc -->
+                        <div class="cart-item-desc" style="height: 300%;">
+                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true" ng-click="cart.deleteCart(item.cartid, item.product.productid)"></i></span>
+                            <span class="badge">Sản phẩm</span>
+                            <h6>{{item.product.productname}}</h6>
+                            <span class="badge">Tác giả</span>
+                            <h6>{{item.product.author}}</h6>
+                            <p class="size">Số lượng: </p> <input ng-change="cart.saveCart()" ng-model="item.quantity" type="number" ng-min="0" ng-max="item.product.quantity"
+							   style="max-width: 40px; max-height: 15px; margin-bottom: 10px;">
+                            <p class="color">Đơn giá:  {{item.sumprice | number: 0}}đ</p> 
+                           
+                        </div>
+                    </a>
+                </div>
+
+                
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-amount-summary">
+
+                <h2>Tổng giỏ hàng</h2>
+                <ul class="summary-table">
+                    <li><span>Sản phẩm</span> <span>Tổng giá</span></li>
+                    <li ng-repeat="item in cart.listCarts"><span>{{item.product.productname}}</span> <span>{{item.product.price * item.quantity|number:0}} đ</span></li>
+                    <li style="color: red;"><span>Tổng đơn giỏ hàng:</span> <span>{{cart.amount|number:0}} đ</span></li>
+                </ul>
+                <div class="checkout-btn mt-100" ng-if="cart.count > 0">
+                    <a th:href="@{/order/purchase}" class="btn essence-btn">Thanh toán</a>
+                </div>
+            </div>
+        </div>
+</div>

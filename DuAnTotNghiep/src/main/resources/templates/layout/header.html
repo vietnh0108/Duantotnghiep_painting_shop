@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+    
+        <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
+            <!-- Classy Menu -->
+            <nav class="classy-navbar" id="essenceNav">
+                <!-- Logo -->
+                <a class="nav-brand" th:href="@{/}"><img src="/img/core-img/logo.png" alt=""></a>
+                <!-- Navbar Toggler -->
+                <div class="classy-navbar-toggler">
+                    <span class="navbarToggler"><span></span><span></span><span></span></span>
+                </div>
+                <!-- Menu -->
+                <div class="classy-menu">
+                    <!-- close btn -->
+                    <div class="classycloseIcon">
+                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                    </div>
+                    <!-- Nav Start -->
+                    <div class="classynav">
+                        <ul>
+                            <li><a href="/product/list">Shop</a>
+                                <div class="megamenu">
+                                    <ul class="single-mega cn-col-4" >
+                                        <li class="title">Thematic Classification</li>
+                                        <li ng-repeat="c in pagecategory1.items"><a href="" ng-click="shopcategory(c.cateid)">{{c.catename}}</a></li>
+                                    </ul>
+                                    <ul class="single-mega cn-col-4">
+                                        <li class="title">Medium and Technique Segmentation</li>
+                                        <li ng-repeat="c in pagecategory2.items"><a href="" ng-click="shopcategory(c.cateid)">{{c.catename}}</a></li>
+                                    </ul>
+                                    <ul class="single-mega cn-col-4">
+                                        <li class="title">By Artist or Author</li>
+                                        <li ng-repeat="c in pagecategory3.items"><a href="" ng-click="shopcategory(c.cateid)">{{c.catename}}</a></li>
+
+                                    </ul>
+                                    <ul class="single-mega cn-col-4">
+                                        <li class="title">By Target Audience</li>
+                                        <li ng-repeat="c in pagecategory4.items"><a href="" ng-click="shopcategory(c.cateid)">{{c.catename}}</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#request.remoteUser}"><a href="#">Thông tin</a>
+                                <ul class="dropdown">
+                                    <li><a th:href="@{/account/profile}">Người dùng</a></li>
+                                    <li><a th:href="@{/order/list}">Đơn hàng</a></li>
+
+                                    <!-- <li><a href="single-product-details.html">Product Details</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="single-blog.html">Single Blog</a></li>
+                                    <li><a href="regular-page.html">Regular Page</a></li>
+                                    <li><a href="contact.html">Contact</a></li> --> 
+                                </ul>
+                            </li>
+                            <th:block th:if="${#request.remoteUser}">
+								<li
+									th:if="${#request.isUserInRole('ADMN') or #request.isUserInRole('STAF')}">
+									<a th:href="@{/admin/home/index}">Quản trị</a>
+								</li>
+							</th:block>
+                            <li th:if="${#request.remoteUser}"><a th:href="@{/security/logoff}">Đăng xuất</a></li>
+                            <li th:if="!${#request.remoteUser}"><a th:href="@{/security/login/form}">Đăng Nhập</a></li>
+                        </ul>
+                    </div>
+                    <!-- Nav End -->
+                </div>
+            </nav>
+
+            <!-- Header Meta Data -->
+            <div class="header-meta d-flex clearfix justify-content-end">
+                <!-- Search Area -->
+                <div class="search-area">
+                    <form action="#" method="post">
+                        <input type="search" name="search" id="headerSearch" placeholder="Type for search">
+                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+                <!-- Favourite Area -->
+                <div class="favourite-area" th:if="${#request.remoteUser}">
+                    <a th:href="@{/favorite/list}"><img src="/img/core-img/heart.svg" alt=""></a>
+                </div>
+                <!-- User Login Info -->
+                <div class="user-login-info" th:if="${#request.remoteUser}">
+                    <a th:href="@{/account/profile}"><img src="/img/core-img/user.svg" alt=""></a>
+                    <div style="display: none;" id="userremost">[[${#request.remoteUser}]]</div>
+                </div>
+                <!-- Cart Area -->
+                <div class="cart-area">
+                    <a href="#" id="essenceCartBtn"><img src="/img/core-img/bag.svg" alt=""> <span>{{cart.count}}</span></a>
+                </div>
+            </div>
+
+        </div>
+
+</body>
+</html>

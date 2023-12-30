@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+    <main ng-controller="detail-ctrl">
+        <section class="single_product_details_area d-flex align-items-center" th:object="${item}">
+
+            <!-- Single Product Thumb -->
+            <div class="single_product_thumb clearfix">
+                <div class="product_thumbnail_slides owl-carousel">
+                    <img th:src="@{|/images/products/*{IMAGE}|}" alt="">
+                    <img th:src="@{|/images/products/*{IMAGE}|}" alt="">
+                    <img th:src="@{|/images/products/*{IMAGE}|}" alt="">
+                </div>
+            </div>
+
+            <!-- Single Product Description -->
+            <div class="single_product_desc clearfix">
+                <div style="display: none" id="productid">[[*{PRODUCTID}]] </div>
+                <div style="display: none" id="username">[[${#request.remoteUser}]]</div>
+                <span>[[*{categories.CATENAME}]]</span>
+                <span style="display: none;" id="categoryid">[[*{categories.CATEID}]]</span>
+                <a>
+                    <h2>[[*{PRODUCTNAME}]]</h2>
+                </a>
+                <p class="product-price" th:text="${formattedPrice}"></p>
+                <p class="product-desc">Tác giả: [[*{AUTHOR}]]</p>
+                <p class="product-desc">Mô tả: [[*{DESCRIPTION}]]</p>   
+                <!-- Form -->
+                <form class="cart-form clearfix" method="post">
+                    <div class="cart-fav-box d-flex align-items-center">
+                        <!-- Cart -->
+                        <button name="addtocart" th:attr="ng-click=@{|cart.add(*{PRODUCTID})|}"
+                            class="btn essence-btn">Add to cart</button>
+                        <!-- Favourite -->
+                        <div th:if="${#request.remoteUser}" class="product-favourite ml-4">
+                            <a th:attr="ng-click=@{|favorite.triggle()|}" ng-if=!favorite.isLike data-tooltip="Thêm vào yêu thích">
+                                <i class="favme fa fa-heart"></i>
+                            </a>
+                            <a th:attr="ng-click=@{|favorite.triggle()|}" ng-if=favorite.isLike data-tooltip="Xoá khỏi yêu thích">
+                                <i class="favme fa fa-heart active"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <section class="new_arrivals_area section-padding-80 clearfix">
+            <div class="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-heading text-center">
+                            <h2>Sản phẩm tương tự</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="">
+                <div class="row">
+
+                    <div class="col-12 col-sm-6 col-lg-3" ng-repeat="item in pagecate.items | orderBy: '+quantity'">
+
+                        <div class="single-product-wrapper">
+
+                            <div class="product-img">
+                                <img src="/images/products/{{item.image}}" alt="">
+                                <!-- Hover Thumb -->
+                                <img class="hover-img" src="/images/products/{{item.image}}" alt="">
+                                <!-- Favourite -->
+                                <div ng-if="!account">
+                                </div>
+                                <div ng-if="account" class="product-favourite">
+                                    <div ng-if="checkfav(item,account)==true">
+                                        <a ng-click="actionfav(item,account)" class="favme fa fa-heart active">
+                                            <!-- <i ></i> -->
+                                        </a>
+                                    </div>
+                                    <div ng-if="checkfav(item,account)==false">
+                                        <a ng-click="actionfav(item,account)" class="favme fa fa-heart">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product Description -->
+                            <div class="product-description">
+                                <span>Tác giả: {{item.author}}</span>
+                                <a href="/product/detail/{{item.productid}}">
+                                    <h6>{{item.productname}}</h6>
+                                </a>
+                                <p class="product-price">{{item.price | number : 0}}đ</p>
+
+                                <!-- Hover Content -->
+                                <div class="hover-content">
+                                    <!-- Add to Cart -->
+                                    <div class="add-to-cart-btn">
+                                        <a th:attr="ng-click=@{|cart.add(item.productid)|}"
+                                            data-tooltip="Thêm vào giỏ hàng" class="btn essence-btn">Add to
+                                            Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="brands-area d-flex align-items-center justify-content-between">
+            <!-- Brand Logo -->
+            <div class="single-brands-logo">
+                <img src="../../img/core-img/brand1.png" alt="">
+            </div>
+            <!-- Brand Logo -->
+            <div class="single-brands-logo">
+                <img src="../../img/core-img/brand2.png" alt="">
+            </div>
+            <!-- Brand Logo -->
+            <div class="single-brands-logo">
+                <img src="../../img/core-img/brand3.png" alt="">
+            </div>
+            <!-- Brand Logo -->
+            <div class="single-brands-logo">
+                <img src="../../img/core-img/brand4.png" alt="">
+            </div>
+            <!-- Brand Logo -->
+            <div class="single-brands-logo">
+                <img src="../../img/core-img/brand5.png" alt="">
+            </div>
+            <!-- Brand Logo -->
+            <div class="single-brands-logo">
+                <img src="../../img/core-img/brand6.png" alt="">
+            </div>
+        </div>
+        </section>
+    </main>
+
+
+
+</body>
+
+</html>

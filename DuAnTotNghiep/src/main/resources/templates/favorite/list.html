@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+</head>
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+    <main>
+        <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <div class="page-title text-center">
+                            <h2>Sản phẩm yêu thích</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ##### Breadcumb Area End ##### -->
+    
+        <!-- ##### Shop Grid Area Start ##### -->
+        <section class="shop_grid_area section-padding-80">
+            <div class="container">
+                <div class="row">
+                  
+    
+                    <div class="col-12">
+                        <div class="shop_grid_product_area">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="product-topbar d-flex align-items-center justify-content-between">
+                                        <div class="product-sorting d-flex">
+                                            <p>Tìm kiếm: </p>
+                                            <input type="text" class="form-control" placeholder="Nhập thông tin" ng-model="searchProduct">
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+    
+                                <!-- Single Product -->
+                                <div ng-repeat="item in pagerListFavorite.items | filter: searchProduct" class="col-12 col-sm-6 col-lg-4" >
+                                    <div class="single-product-wrapper">
+                                        <!-- Product Image -->
+                                    
+                                        <div class="product-img">
+                                            <img src="/images/products/{{item.product.image}}" alt="">
+                                            <!-- Hover Thumb -->
+                                            <img class="hover-img" src="/images/products/{{item.product.image}}" alt="">
+    
+                                          
+                                            <div ng-if="!account">
+                                            </div>
+                                            <div ng-if="account" class="product-favourite">
+                                                <div ng-if="checkfav(item.product,account)==true">
+                                                    <a ng-click="actionfav(item.product,account)" class="favme fa fa-heart active">
+                                                        <!-- <i ></i> -->
+                                                    </a>
+                                                </div>
+                                                <div ng-if="checkfav(item.product,account)==false">
+                                                    <a ng-click="actionfav(item.product,account)" class="favme fa fa-heart">
+                                                        <!-- <i ></i> -->
+                                                    </a>
+                                                </div>
+            
+                                              
+                                            </div>
+                                        </div>
+    
+                                        <!-- Product Description -->
+                                        <div class="product-description">
+                                            <span>Tác giả: {{item.product.author}}</span>
+                                            <a href="/product/detail/{{item.product.productid}}">
+                                                <h6>{{item.product.productname}}</h6>
+                                            </a>
+                                            <p class="product-price">{{item.product.price | number : 0}}đ</p>
+                                            <!-- Hover Content -->
+                                            <div class="hover-content">
+                                                <!-- Add to Cart -->
+                                                <div class="add-to-cart-btn">
+                                                    <a th:attr="ng-click=@{|cart.add(item.product.productid)|}"
+                                                        data-tooltip="Thêm vào giỏ hàng" class="btn essence-btn">Add to
+                                                        Cart</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                
+    
+                            </div>
+                        </div>
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" ng-click="pagerListFavorite.first()">
+                                        << </a>
+                                </li>
+                            </ul>
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" ng-click="pagerListFavorite.prev()">
+                                        < </a>
+                                </li>
+                            </ul>
+                            <ul class="pagination">
+                                <li class="page-item"><a style="padding: 0.5rem 0.75rem;display: block; cursor: default;">
+                                        {{pagerListFavorite.page + 1}} - {{pagerListFavorite.count}} đến {{pagerListFavorite.count}} </a></li>
+                            </ul>
+    
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" ng-click="pagerListFavorite.next()"> > </a></li>
+                            </ul>
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" ng-click="pagerListFavorite.last()"> >> </a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+    </main>
+    
+</body>
+
+</html>

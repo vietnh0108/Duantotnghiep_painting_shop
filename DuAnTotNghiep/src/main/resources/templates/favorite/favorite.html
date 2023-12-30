@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+</head>
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+    <main>
+        <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <div class="page-title text-center">
+                            <h2>Sản phẩm yêu thích</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ##### Breadcumb Area End ##### -->
+    
+        <!-- ##### Shop Grid Area Start ##### -->
+        <section class="shop_grid_area section-padding-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="shop_sidebar_area">
+    
+                            <!-- ##### Single Widget ##### -->
+                            <div class="widget catagory mb-50">
+                                <!-- Widget Title -->
+                                <h6 class="widget-title mb-30">Danh mục</h6>
+    
+                                <!--  Catagories  -->
+                                <div class="catagories-menu">
+                                    <ul id="menu-content2" class="menu-content collapse show">
+                                        <!-- Single Item -->
+                                        <li data-toggle="collapse" data-target="#clothing" >
+                                            <a href="#">clothing</a>
+                                            <ul class="sub-menu collapse show" id="clothing">
+                                                <li ng-repeat="c in listCategory"><a >{{c.catename}}</a></li>
+                                            </ul>
+                                        </li>
+                                        <!-- Single Item -->
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+    
+                            <!-- ##### Single Widget ##### -->
+                            <div class="widget price mb-50">
+                                <!-- Widget Title -->
+                                <h6 class="widget-title mb-30">Filter by</h6>
+                                <!-- Widget Title 2 -->
+                                <p class="widget-title2 mb-30">Price</p>
+    
+                                <div class="widget-desc">
+                                    <div class="slider-range">
+                                        <div data-min="49" data-max="360" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="49" data-value-max="360" data-label-result="Range:">
+                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+                                        </div>
+                                        <div class="range-price">Range: $49.00 - $360.00</div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <!-- ##### Single Widget ##### -->
+                            <div class="widget color mb-50">
+                                <!-- Widget Title 2 -->
+                                <p class="widget-title2 mb-30">Color</p>
+                                <div class="widget-desc">
+                                    <ul class="d-flex">
+                                        <li><a href="#" class="color1"></a></li>
+                                        <li><a href="#" class="color2"></a></li>
+                                        <li><a href="#" class="color3"></a></li>
+                                        <li><a href="#" class="color4"></a></li>
+                                        <li><a href="#" class="color5"></a></li>
+                                        <li><a href="#" class="color6"></a></li>
+                                        <li><a href="#" class="color7"></a></li>
+                                        <li><a href="#" class="color8"></a></li>
+                                        <li><a href="#" class="color9"></a></li>
+                                        <li><a href="#" class="color10"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+    
+                            <!-- ##### Single Widget ##### -->
+                            <div class="widget brands mb-50">
+                                <!-- Widget Title 2 -->
+                                <p class="widget-title2 mb-30">Brands</p>
+                                <div class="widget-desc">
+                                    <ul>
+                                        <li><a href="#">Asos</a></li>
+                                        <li><a href="#">Mango</a></li>
+                                        <li><a href="#">River Island</a></li>
+                                        <li><a href="#">Topshop</a></li>
+                                        <li><a href="#">Zara</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-12 col-md-8 col-lg-9">
+                        <div class="shop_grid_product_area">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="product-topbar d-flex align-items-center justify-content-between">
+                                        <!-- Total Products -->
+                                        <div class="total-products">
+                                            <p><span>186</span> products found</p>
+                                        </div>
+                                        <!-- Sorting -->
+                                        <div class="product-sorting d-flex">
+                                            <p>Sort by:</p>
+                                            <form action="#" method="get">
+                                                <select name="select" id="sortByselect">
+                                                    <option value="value">Highest Rated</option>
+                                                    <option value="value">Newest</option>
+                                                    <option value="value">Price: $$ - $</option>
+                                                    <option value="value">Price: $ - $$</option>
+                                                </select>
+                                                <input type="submit" class="d-none" value="">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+    
+                                <!-- Single Product -->
+                                <div class="col-12 col-sm-6 col-lg-4" ng-repeat="item in pagerListFavorite.items">
+                                    <div class="single-product-wrapper">
+                                        <!-- Product Image -->
+                                        <div class="product-img">
+                                            <img src="/img/product-img/product-1.jpg" alt="">
+                                            <!-- Hover Thumb -->
+                                            <img class="hover-img" src="/img/product-img/product-2.jpg" alt="">
+    
+                                          
+                                            <div ng-if="!account">
+                                            </div>
+                                            <div ng-if="account" class="product-favourite">
+                                                <div ng-if="checkfav(item.product,account)==true">
+                                                    <a ng-click="actionfav(item.product,account)" class="favme fa fa-heart active">
+                                                        <!-- <i ></i> -->
+                                                    </a>
+                                                </div>
+                                                <div ng-if="checkfav(item.product,account)==false">
+                                                    <a ng-click="actionfav(item.product,account)" class="favme fa fa-heart">
+                                                        <!-- <i ></i> -->
+                                                    </a>
+                                                </div>
+            
+                                              
+                                            </div>
+                                        </div>
+    
+                                        <!-- Product Description -->
+                                        <div class="product-description">
+                                            <span>topshop</span>
+                                            <a href="/product/detail/{{item.product.productid}}">
+                                                <h6>{{item.product.productname}}</h6>
+                                            </a>
+                                            <p class="product-price">{{item.product.price | number : 0}}đ</p>
+                                            <!-- Hover Content -->
+                                            <div class="hover-content">
+                                                <!-- Add to Cart -->
+                                                <div class="add-to-cart-btn">
+                                                    <a th:attr="ng-click=@{|cart.add(item.product.productid)|}"
+                                                        data-tooltip="Thêm vào giỏ hàng" class="btn essence-btn">Add to
+                                                        Cart</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                
+    
+                            </div>
+                        </div>
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" ng-click="pagerListOrder.first()">
+                                        << </a>
+                                </li>
+                            </ul>
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" ng-click="pagerListOrder.prev()">
+                                        < </a>
+                                </li>
+                            </ul>
+                            <ul class="pagination">
+                                <li class="page-item"><a style="padding: 0.5rem 0.75rem;display: block; cursor: default;">
+                                        {{pagerListOrder.page + 1}} - {{pagerListOrder.count}} đến {{pagerListOrder.count}} </a></li>
+                            </ul>
+    
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" ng-click="pagerListOrder.next()"> > </a></li>
+                            </ul>
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" ng-click="pagerListOrder.last()"> >> </a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+    </main>
+    
+</body>
+
+</html>
